@@ -1,0 +1,591 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>STCKLY — Medical Devices</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Floating Call Widget -->
+<div class="call-widget">
+  <div class="cw-icon">📞</div>
+  <div>
+    <div class="cw-lbl">Emergency Helpline</div>
+    <div class="cw-num">+91 98765 43210</div>
+  </div>
+</div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-close" onclick="closeMobile()">✕</span>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="services.html">Services</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact Us</a>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <span>📍 <b>Salem, Tamil Nadu, India</b></span>
+  <div class="topbar-right">
+    <span>📞 <b>+91 98765 43210</b></span>
+    <span>🕐 Mon–Sat: 9AM–6PM IST</span>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <img src="assets/logo.webp" alt="Stackly Logo" style="height: 100px; width: auto;" />
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+  </ul>
+  <button class="nav-emergency" onclick="window.location='login.html'">Login/Register</button>
+  <div class="hamburger" onclick="openMobile()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-circles">
+    <div class="hero-circle hc1"></div>
+    <div class="hero-circle hc2"></div>
+    <div class="hero-circle hc3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Advanced Medical Devices</div>
+    <h1 class="hero-title">
+      Enhancing Lives,<br>
+      Reviving <span class="blue">Health</span> for<br>
+      <span class="blue">Better</span> Tomorrow.
+    </h1>
+    <p class="hero-sub">Discover precision-engineered medical device solutions where patient safety comes first. STCKLY delivers compassionate, clinically-validated devices designed for modern healthcare.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request an Appointment →</button>
+      <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Our Devices</button>
+    </div>
+    <div class="hero-badges">
+      <div class="hbadge">
+        <div class="hbadge-icon">🏥</div>
+        <div>
+          <div class="hbadge-num" data-count="500">0+</div>
+          <div class="hbadge-lbl">Products Delivered</div>
+        </div>
+      </div>
+      <div class="hbadge">
+        <div class="hbadge-icon">🩺</div>
+        <div>
+          <div class="hbadge-num" data-count="50">0+</div>
+          <div class="hbadge-lbl">Hospital Partners</div>
+        </div>
+      </div>
+      <div class="hbadge">
+        <div class="hbadge-icon">⭐</div>
+        <div>
+          <div class="hbadge-num" data-count="98">0%</div>
+          <div class="hbadge-lbl">Satisfaction Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img class="hero-img" src="assets/image_4.webp" alt="Doctor STCKLY"/>
+</section>
+
+<!-- Quick Links Bar -->
+<div class="quicklinks">
+  <div class="ql-item reveal">
+    <span class="ql-icon">👤</span>
+    <div class="ql-text">Visitor Information</div>
+  </div>
+  <div class="ql-item reveal">
+    <span class="ql-icon">🔍</span>
+    <div class="ql-text">Find a Device</div>
+  </div>
+  <div class="ql-item reveal">
+    <span class="ql-icon">📍</span>
+    <div class="ql-text">Our Location</div>
+  </div>
+  <div class="ql-item reveal">
+    <span class="ql-icon">📞</span>
+    <div class="ql-text">Connect With Us</div>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-img-wrap reveal left">
+      <img src="assets/image_1.webp" alt="Medical Team"/>
+    </div>
+    <div class="reveal">
+      <div class="about-tag">✚ About STCKLY</div>
+      <h2 class="section-title">Advancing Medical Solutions for Health.</h2>
+      <p class="section-desc">Experience comprehensive healthcare solutions at STCKLY, where patient well-being is our priority. We provide precision-engineered, CDSCO-compliant medical devices ensuring exceptional clinical performance tailored to every need.</p>
+      <ul class="check-list">
+        <li>AI-Powered Diagnostics</li>
+        <li>Comfort-First Approach</li>
+        <li>Real-Time Monitoring</li>
+        <li>Patient-Centered Care</li>
+        <li>Secure Data Encryption</li>
+        <li>Multilingual Support Team</li>
+        <li>Evidence-Based Treatment</li>
+        <li>24/7 Emergency Support</li>
+      </ul>
+      <button class="btn-primary" style="margin-bottom:24px" onclick="window.location='about.html'">More About Us →</button>
+      <div class="about-help">
+        <div class="phone-icon">📞</div>
+        <div>
+          <div class="help-lbl">Need help?</div>
+          <div class="help-num">+91 98765 43210</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-right reveal right">
+      <div class="about-right-img">
+        <img src="assets/image_13.webp" alt="Medical Support"/>
+      </div>
+      <div class="badge-247">
+        <div class="b247-num">24/7</div>
+        <div class="b247-lbl">Emergency Patient Support</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Ophthalmology <span>✦</span></span>
+    <span class="marquee-item">Medicine &amp; Nephrology <span>✦</span></span>
+    <span class="marquee-item">Dental Care <span>✦</span></span>
+    <span class="marquee-item">Neurology <span>✦</span></span>
+    <span class="marquee-item">Cardiology <span>✦</span></span>
+    <span class="marquee-item">Food &amp; Nutrition <span>✦</span></span>
+    <span class="marquee-item">ISO 13485 Certified <span>✦</span></span>
+    <span class="marquee-item">CDSCO Compliant <span>✦</span></span>
+    <span class="marquee-item">Ophthalmology <span>✦</span></span>
+    <span class="marquee-item">Medicine &amp; Nephrology <span>✦</span></span>
+    <span class="marquee-item">Dental Care <span>✦</span></span>
+    <span class="marquee-item">Neurology <span>✦</span></span>
+    <span class="marquee-item">Cardiology <span>✦</span></span>
+    <span class="marquee-item">Food &amp; Nutrition <span>✦</span></span>
+    <span class="marquee-item">ISO 13485 Certified <span>✦</span></span>
+    <span class="marquee-item">CDSCO Compliant <span>✦</span></span>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="services" id="services">
+  <div class="section-header reveal">
+    <div class="about-tag" style="justify-content:center;display:inline-flex;margin-bottom:12px">✚ Our Services</div>
+    <h2 class="section-title">Innovative Medical Devices for<br>Modern Healthcare</h2>
+  </div>
+  <div class="services-grid stagger-wrap">
+    <div class="svc-card svc-card-1 reveal">
+      <div>
+        <div class="svc-icon-wrap">👁️</div>
+        <div class="svc-name">Ophthalmology Devices</div>
+        <p class="svc-desc">Advanced ophthalmic diagnostic equipment for precise eye care, featuring auto-refractometers, slit lamps and fundus cameras.</p>
+      </div>
+      <div class="svc-bottom">
+        <div class="learn-text" style="font-weight:700; font-size:.9rem; color:inherit; opacity:0.8;">Explore Devices</div>
+        <div class="learn-arrow">→</div>
+      </div>
+    </div>
+    <div class="svc-card svc-card-2 reveal">
+      <div>
+        <div class="svc-icon-wrap">🦷</div>
+        <div class="svc-name">Dental Care Equipment</div>
+        <p class="svc-desc">State-of-the-art dental instruments including imaging systems, ultrasonic scalers and sterilization units for modern clinics.</p>
+      </div>
+      <div class="svc-bottom">
+        <div class="learn-text" style="font-weight:700; font-size:.9rem; color:var(--navy); opacity:0.8;">Explore Devices</div>
+        <div class="learn-arrow">→</div>
+      </div>
+    </div>
+    <div class="svc-card svc-card-3 reveal">
+      <div>
+        <div class="svc-icon-wrap">❤️</div>
+        <div class="svc-name">Cardiology Solutions</div>
+        <p class="svc-desc">Cutting-edge cardiac monitoring devices — ECG systems, Holter monitors and stress test equipment trusted by ICU specialists.</p>
+      </div>
+      <div class="svc-bottom">
+        <div class="learn-text" style="font-weight:700; font-size:.9rem; color:#fff; opacity:0.9;">Explore Devices</div>
+        <div class="learn-arrow">→</div>
+      </div>
+    </div>
+    <div class="svc-card svc-card-4 reveal">
+      <div>
+        <div class="svc-icon-wrap">🧠</div>
+        <div class="svc-name">Neuro Surgery Tools</div>
+        <p class="svc-desc">Precision neurosurgical instruments including EEG systems, intracranial pressure monitors and neuroimaging support devices.</p>
+      </div>
+      <div class="svc-bottom">
+        <div class="learn-text" style="font-weight:700; font-size:.9rem; color:var(--navy); opacity:0.8;">Explore Devices</div>
+        <div class="learn-arrow">→</div>
+      </div>
+    </div>
+  </div>
+  <p class="svc-more reveal">We have 8+ more Care Service including Emergency Department. <a href="services.html">View All →</a></p>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="testimonials" id="testimonials">
+  <div class="about-tag reveal" style="margin-bottom:8px">✚ Happy Patients</div>
+  <div class="testi-inner">
+    <div class="reveal left">
+      <h2 class="section-title">Stories of Healing and Trust From Our Valued Patients</h2>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote" id="testiQuote">"STCKLY's CardioTrack Pro transformed our cardiology ward. The AI-assisted arrhythmia detection catches what we'd miss on night shifts. The build quality is <b>truly exceptional</b> and after-sales support has been outstanding."</p>
+      <div class="testi-author-name" id="testiName">Dr. Ramesh Subramanian</div>
+      <div class="testi-author-role" id="testiRole">Chief Cardiologist, Apollo Hospitals Chennai</div>
+      <div class="testi-dots">
+        <div class="tdot active" onclick="switchTesti(0)"></div>
+        <div class="tdot" onclick="switchTesti(1)"></div>
+        <div class="tdot" onclick="switchTesti(2)"></div>
+      </div>
+    </div>
+    <div class="reveal right">
+      <div class="rating-card">
+        <div class="rating-star">★</div>
+        <div>
+          <div class="rating-num">4.8</div>
+          <div class="rating-lbl">Average Google Rating</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <img src="assets/image_10.webp" alt="Medical Video"/>
+        <div class="play-btn">▶</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LAB TESTS ═══ -->
+<section class="lab" id="lab">
+  <div class="section-header reveal" style="text-align:left;margin-bottom:0">
+    <div class="about-tag" style="display:inline-flex;margin-bottom:10px">✚ Affordable Lab Test Rates</div>
+    <h2 class="section-title">We Have Lab Test Facilities, So<br>Book Yours Today!</h2>
+  </div>
+  <div style="height:48px"></div>
+  <div class="lab-inner">
+    <div class="lab-img reveal left">
+      <img src="assets/image_9.webp" alt="Lab Doctors"/>
+    </div>
+    <div class="lab-nav reveal">
+      <button class="lab-arrow" onclick="prevTest()">←</button>
+      <button class="lab-arrow" onclick="nextTest()">→</button>
+    </div>
+    <div class="test-card reveal right" id="testCard">
+      <div class="test-discount" id="testDiscount">20% Off</div>
+      <div class="test-icon-wrap" id="testIcon">💉</div>
+      <div class="test-name" id="testName">Blood Test</div>
+      <div class="test-price-lbl">Starting From <b id="testPrice">₹499</b></div>
+      <button class="btn-book">Book A Test →</button>
+      <p class="test-desc">We provide accurate and affordable blood tests for all your health needs with certified laboratory professionals.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOCTORS / PRODUCTS ═══ -->
+<section class="doctors" id="doctors">
+  <div class="doctors-header">
+    <div class="reveal left">
+      <div class="about-tag" style="margin-bottom:10px">✚ Our Products</div>
+      <h2 class="section-title">Highly Skilled Devices,<br>Committed to Excellence</h2>
+    </div>
+    <div class="cat-filters reveal right">
+      <button class="cat-btn active" onclick="filterDocs(this,'Cardiology')">Cardiology</button>
+      <button class="cat-btn" onclick="filterDocs(this,'Orthopedics')">Orthopedics</button>
+      <button class="cat-btn" onclick="filterDocs(this,'Neurology')">Neurology</button>
+      <button class="cat-btn" onclick="filterDocs(this,'Diagnostics')">Diagnostics</button>
+    </div>
+  </div>
+  <div class="doctors-grid stagger-wrap" id="doctorsGrid">
+    <div class="doc-card reveal">
+      <img src="assets/image_3.webp" alt="ECG Monitor"/>
+      <div class="doc-overlay">
+        <div class="doc-name">CardioTrack Pro</div>
+        <div class="doc-spec">12-Lead ECG Monitor</div>
+        <div class="doc-appt"><button class="doc-appt-btn">Enquire →</button></div>
+      </div>
+    </div>
+    <div class="doc-card reveal">
+      <img src="assets/image_14.webp" alt="Medical Device"/>
+      <div class="doc-overlay">
+        <div class="doc-name">GlucoSense X1</div>
+        <div class="doc-spec">Continuous Glucose Monitor</div>
+        <div class="doc-appt"><button class="doc-appt-btn">Enquire →</button></div>
+      </div>
+    </div>
+    <div class="doc-card reveal">
+      <img src="assets/image_11.webp" alt="Patient Monitor"/>
+      <div class="doc-overlay">
+        <div class="doc-name">VentiCare 500</div>
+        <div class="doc-spec">Portable Ventilator</div>
+        <div class="doc-appt"><button class="doc-appt-btn">Enquire →</button></div>
+      </div>
+    </div>
+    <div class="doc-card reveal">
+      <img src="assets/image_12.webp" alt="Surgical Device"/>
+      <div class="doc-overlay">
+        <div class="doc-name">OptiScan Pro</div>
+        <div class="doc-spec">Wireless Ultrasound</div>
+        <div class="doc-appt"><button class="doc-appt-btn">Enquire →</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA SPLIT ═══ -->
+<div class="cta-split reveal" id="contact">
+  <div class="cta-doctor">
+    <img src="assets/image_5.webp" alt="Doctor CTA"/>
+    <div class="cta-doctor-overlay">
+      <div class="cta-badge">10+ Years of Experience</div>
+      <h3 class="cta-title">STCKLY Is Dedicated<br>to Helping Others Heal.</h3>
+      <button class="btn-primary" onclick="window.location='contact.html'">Book an Appointment →</button>
+    </div>
+  </div>
+  <div class="cta-newsletter">
+    <div class="nl-tag">✚ Subscribe to Newsletter</div>
+    <h3 class="nl-title">Let's Subscribe to<br>Get Our Newsletter.</h3>
+    <p class="nl-desc">Stay updated with STCKLY's latest medical device launches, clinical guidelines, and healthcare insights tailored to your needs.</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="Your email address"/>
+      <button class="nl-btn">Subscribe Now →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BLOG ═══ -->
+<section class="blog" id="blog">
+  <div class="blog-header reveal">
+    <div>
+      <div class="about-tag" style="margin-bottom:10px">✚ Latest News &amp; Articles</div>
+      <h2 class="section-title" style="margin-bottom:0">Trending Topics in<br>Medicine and Wellness</h2>
+    </div>
+    <button class="btn-primary" onclick="window.location='blog.html'">View All Post →</button>
+  </div>
+  <div class="blog-grid stagger-wrap">
+    <div class="blog-card reveal">
+      <div class="blog-img">
+        <img src="assets/image_6.webp" alt="Blog 1"/>
+      </div>
+      <div class="blog-body">
+        <div class="blog-meta">
+          <span>📅 08 June 2026</span>
+          <span>🏷 Device Care</span>
+        </div>
+        <div class="blog-title">Selecting the Best Medical Device for Your Clinical Needs</div>
+        <a class="blog-link" href="#">Read More →</a>
+      </div>
+    </div>
+    <div class="blog-card reveal">
+      <div class="blog-img">
+        <img src="assets/image_7.webp" alt="Blog 2"/>
+      </div>
+      <div class="blog-body">
+        <div class="blog-meta">
+          <span>📅 05 June 2026</span>
+          <span>🏷 Technology</span>
+        </div>
+        <div class="blog-title">AI-Powered Diagnostics: The Future of Patient Monitoring</div>
+        <a class="blog-link" href="#">Read More →</a>
+      </div>
+    </div>
+    <div class="blog-card reveal">
+      <div class="blog-img">
+        <img src="assets/image_8.webp" alt="Blog 3"/>
+      </div>
+      <div class="blog-body">
+        <div class="blog-meta">
+          <span>📅 01 June 2026</span>
+          <span>🏷 Cardiology</span>
+        </div>
+        <div class="blog-title">Gentle Monitoring Technologies to Promote Heart Wellness</div>
+        <a class="blog-link" href="#">Read More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-logo">
+        <img src="assets/logo.webp" alt="Stackly Logo" style="height: 100px; width: auto;" />
+      </div>
+      <p class="footer-desc">Precision medical devices engineered in Salem, Tamil Nadu. Trusted by clinicians, cleared by regulators, built for India's healthcare future.</p>
+      <div class="footer-founder">
+        <div class="founder-avatar">
+          <img src="assets/image_2.webp" alt="Founder"/>
+        </div>
+        <div>
+          <div class="founder-name">Arun Krishnamurthy</div>
+          <div class="founder-title">Co Founder, STCKLY</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul class="footer-list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Our Services</a></li>
+        <li><a href="#doctors">Products</a></li>
+        <li><a href="#blog">Our Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Get In Touch</h5>
+      <div class="footer-contact-lbl">Location</div>
+      <div class="footer-contact-val">Salem, Tamil Nadu, India — 636 001</div>
+      <div class="footer-contact-lbl">Contact</div>
+      <div class="footer-contact-val">Phone: <a href="tel:+919876543210">+91 98765 43210</a></div>
+      <div class="footer-contact-val">Email: <a href="mailto:info@stckly.com">info@stckly.com</a></div>
+    </div>
+    <div class="footer-col">
+      <h5>Utility Pages</h5>
+      <ul class="footer-list">
+        <li><a href="#">Certifications</a></li>
+        <li><a href="#">AMC Plans</a></li>
+        <li><a href="#">Style Guide</a></li>
+        <li><a href="#">Licenses</a></li>
+        <li><a href="#">Changelog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Our Services</h5>
+      <ul class="footer-list">
+        <li><a href="#">Cardiology</a></li>
+        <li><a href="#">Neuro Surgery</a></li>
+        <li><a href="#">Dental Care</a></li>
+        <li><a href="#">Ophthalmology</a></li>
+        <li><a href="#">Diagnostics</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 STCKLY Medical Devices, Salem, Tamil Nadu, India. All rights reserved.</div>
+    <div class="footer-socials">
+      <a class="social" href="#">in</a>
+      <a class="social" href="#">𝕏</a>
+      <a class="social" href="#">f</a>
+      <a class="social" href="#">▶</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Scroll Reveal ── */
+const allReveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); } });
+}, {threshold:.12});
+allReveals.forEach(el => ro.observe(el));
+
+/* ── Navbar scroll ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* ── Counter Animation ── */
+function animCount(el, target, suffix) {
+  let n = 0; const inc = Math.ceil(target/60);
+  const iv = setInterval(() => {
+    n = Math.min(n+inc, target);
+    el.textContent = n + suffix;
+    if(n >= target) clearInterval(iv);
+  }, 28);
+}
+const counters = document.querySelectorAll('[data-count]');
+const cro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const el = e.target;
+      const target = parseInt(el.dataset.count);
+      const suffix = el.textContent.replace(/\d+/,'');
+      animCount(el, target, suffix);
+      cro.unobserve(el);
+    }
+  });
+},{threshold:.5});
+counters.forEach(c => cro.observe(c));
+
+/* ── Testimonial Switcher ── */
+const testis = [
+  {q:'"STCKLY\'s CardioTrack Pro transformed our cardiology ward. The AI-assisted arrhythmia detection catches what we\'d miss on night shifts. The build quality is <b>truly exceptional</b>."',n:'Dr. Ramesh Subramanian',r:'Chief Cardiologist, Apollo Hospitals Chennai'},
+  {q:'"GlucoSense X1 has improved diabetic patient compliance by 40%. The EMR integration is seamless and our nursing staff absolutely loves the real-time <b>monitoring dashboard</b>."',n:'Dr. Nirmala Krishnamurthy',r:'Endocrinologist, GKNM Hospital, Coimbatore'},
+  {q:'"STCKLY\'s after-sales support is unmatched. Their technician was on-site within 4 hours. The VentiCare 500 has been <b>rock-solid</b> in our ICU for over a year now."',n:'Dr. Priya Venkatesh',r:'ICU Director, Meenakshi Mission Hospital'}
+];
+let curTesti = 0;
+function switchTesti(i){
+  curTesti = i;
+  document.getElementById('testiQuote').innerHTML = testis[i].q;
+  document.getElementById('testiName').textContent = testis[i].n;
+  document.getElementById('testiRole').textContent = testis[i].r;
+  document.querySelectorAll('.tdot').forEach((d,idx) => d.classList.toggle('active', idx===i));
+}
+setInterval(() => switchTesti((curTesti+1)%testis.length), 5000);
+
+/* ── Lab Tests Carousel ── */
+const tests = [
+  {name:'Blood Test',discount:'20% Off',icon:'💉',price:'₹499'},
+  {name:'CT Scan',discount:'18% Off',icon:'🔭',price:'₹3,499'},
+  {name:'MRI Scan',discount:'15% Off',icon:'🧲',price:'₹5,999'},
+  {name:'X-Ray',discount:'25% Off',icon:'☢️',price:'₹299'},
+];
+let curTest = 0;
+function setTest(i){
+  curTest = (i + tests.length) % tests.length;
+  const t = tests[curTest];
+  const card = document.getElementById('testCard');
+  card.style.opacity = '0'; card.style.transform = 'translateX(20px)';
+  setTimeout(() => {
+    document.getElementById('testName').textContent = t.name;
+    document.getElementById('testDiscount').textContent = t.discount;
+    document.getElementById('testIcon').textContent = t.icon;
+    document.getElementById('testPrice').textContent = t.price;
+    card.style.transition = 'all .4s'; card.style.opacity = '1'; card.style.transform = 'none';
+  },200);
+}
+function nextTest(){ setTest(curTest+1); }
+function prevTest(){ setTest(curTest-1); }
+
+/* ── Doctor Filter ── */
+function filterDocs(btn, cat){
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const grid = document.getElementById('doctorsGrid');
+  grid.style.opacity='0'; grid.style.transform='translateY(20px)';
+  setTimeout(()=>{ grid.style.transition='all .5s'; grid.style.opacity='1'; grid.style.transform='none'; },300);
+}
+
+/* ── Mobile Menu ── */
+function openMobile(){ document.getElementById('mobileMenu').classList.add('open'); }
+function closeMobile(){ document.getElementById('mobileMenu').classList.remove('open'); }
+
+/* ── Smooth active nav ── */
+const sections = document.querySelectorAll('section[id], div[id="contact"]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});
+  navLinks.forEach(a=>{
+    a.classList.remove('active');
+    if(a.getAttribute('href')==='#'+cur) a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

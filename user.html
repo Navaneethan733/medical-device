@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>My Account — STCKLY Medical Devices</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#3c6cf5;--blue-dark:#1a3ec5;--blue-light:#eef1ff;
+  --navy:#0d1b3e;--text:#1a2535;--muted:#5a6a82;
+  --border:#e4e8f5;--white:#ffffff;--bg:#f7f9ff;
+  --red:#ff3b3b;--green:#22c55e;--orange:#f59e0b;--purple:#8b5cf6;
+}
+body{font-family:'Manrope',sans-serif;color:var(--text);background:var(--bg);display:flex;min-height:100vh}
+a{text-decoration:none;color:inherit}
+
+/* MAIN LAYOUT */
+.main{flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{background:#fff;padding:0 32px;height:68px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+
+/* TOP NAVIGATION (replaces sidebar) */
+.header-nav{display:flex;gap:32px;align-items:center;padding:0 32px;height:54px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:68px;z-index:49}
+.hn-links{display:flex;gap:6px;list-style:none}
+.hn-links li a{padding:8px 16px;border-radius:8px;font-size:.84rem;font-weight:700;color:var(--muted);transition:all .2s;display:flex;align-items:center;gap:8px}
+.hn-links li a:hover{background:var(--bg);color:var(--navy)}
+.hn-links li a.active{background:var(--blue-light);color:var(--blue)}
+.hn-badge{background:var(--red);color:#fff;font-size:.62rem;font-weight:800;padding:2px 6px;border-radius:50px}
+.hn-brand{display:flex;align-items:center;gap:8px;margin-right:24px}
+.hn-icon{width:28px;height:28px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.8rem}
+.hn-name{font-size:1.1rem;font-weight:800;color:var(--navy);letter-spacing:.02em}
+.hn-name span{color:var(--blue)}
+.topbar-left .tb-title{font-size:1.1rem;font-weight:800;color:var(--navy)}
+.topbar-left .tb-breadcrumb{font-size:.8rem;color:var(--muted)}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.tb-btn{width:38px;height:38px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;position:relative;transition:all .2s}
+.tb-btn:hover{border-color:var(--blue);background:var(--blue-light)}
+.tb-notif::after{content:'2';position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:.56rem;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.tb-avatar-wrap{display:flex;align-items:center;gap:8px;cursor:pointer;padding:6px 10px;border-radius:10px;transition:background .2s}
+.tb-avatar-wrap:hover{background:var(--bg)}
+.tb-avi{width:34px;height:34px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.86rem}
+.tb-uname{font-size:.84rem;font-weight:700;color:var(--navy)}
+
+/* PAGE */
+.page-content{padding:32px;flex:1}
+
+/* WELCOME BANNER */
+.welcome-banner{background:linear-gradient(135deg,var(--navy) 0%,#1a3a7a 100%);border-radius:20px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;position:relative;overflow:hidden}
+.wb-circles{position:absolute;right:0;top:0;pointer-events:none}
+.wb-circle{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.08)}
+.wbc1{width:250px;height:250px;top:-60px;right:-40px}
+.wbc2{width:350px;height:350px;top:-100px;right:-120px}
+.wb-greeting{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.wb-name{font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:8px}
+.wb-sub{font-size:.86rem;color:rgba(255,255,255,.55);line-height:1.5;max-width:420px}
+.wb-actions{display:flex;gap:12px;margin-top:20px}
+.wb-btn-primary{background:var(--blue);color:#fff;border:none;padding:11px 22px;border-radius:50px;font-family:'Manrope',sans-serif;font-size:.84rem;font-weight:700;cursor:pointer;transition:all .2s}
+.wb-btn-primary:hover{background:#5a82f7;transform:translateY(-1px)}
+.wb-btn-sec{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.15);padding:11px 22px;border-radius:50px;font-family:'Manrope',sans-serif;font-size:.84rem;font-weight:700;cursor:pointer;transition:all .2s}
+.wb-btn-sec:hover{background:rgba(255,255,255,.18)}
+.wb-right{text-align:right;flex-shrink:0;position:relative;z-index:1}
+.wb-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.wb-stat{background:rgba(255,255,255,.08);border-radius:12px;padding:14px 20px;text-align:center}
+.wbs-num{font-size:1.6rem;font-weight:800;color:#fff}
+.wbs-lbl{font-size:.7rem;color:rgba(255,255,255,.45);font-weight:600;margin-top:3px}
+
+/* STAT CARDS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px}
+.stat-card{background:#fff;border-radius:16px;padding:22px;border:1.5px solid var(--border);display:flex;align-items:center;gap:16px;transition:all .2s}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(60,108,245,.1)}
+.sc-icon-wrap{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.sc-label{font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:4px}
+.sc-value{font-size:1.5rem;font-weight:800;color:var(--navy)}
+
+/* TABS */
+.tabs{display:flex;gap:4px;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:24px;width:fit-content}
+.tab-btn{padding:9px 20px;border-radius:9px;border:none;background:transparent;font-family:'Manrope',sans-serif;font-size:.84rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s}
+.tab-btn.active{background:#fff;color:var(--navy);font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+
+/* TAB PANELS */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ORDERS TABLE */
+.table-card{background:#fff;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;margin-bottom:24px}
+.tc-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.tc-title{font-size:.96rem;font-weight:800;color:var(--navy)}
+table{width:100%;border-collapse:collapse}
+th{padding:12px 16px;font-size:.72rem;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;background:var(--bg);text-align:left}
+td{padding:13px 16px;font-size:.84rem;color:var(--text);border-top:1px solid var(--border)}
+tr:hover td{background:#fafbff}
+.status-pill{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:50px}
+.status-pill.delivered{background:#dcfce7;color:#16a34a}
+.status-pill.transit{background:#dbeafe;color:#2563eb}
+.status-pill.pending{background:#fef9c3;color:#ca8a04}
+.status-pill.cancelled{background:#fee2e2;color:#dc2626}
+.status-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
+
+/* DEVICE CARDS */
+.devices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:24px}
+.device-card{background:#fff;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;transition:all .3s}
+.device-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(60,108,245,.1)}
+.dc-img{height:160px;overflow:hidden;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:3rem}
+.dc-body{padding:18px}
+.dc-name{font-size:.94rem;font-weight:800;color:var(--navy);margin-bottom:3px}
+.dc-spec{font-size:.76rem;color:var(--muted);margin-bottom:10px}
+.dc-footer{display:flex;justify-content:space-between;align-items:center}
+.dc-status{font-size:.74rem;font-weight:700;padding:3px 10px;border-radius:50px;background:#dcfce7;color:#16a34a}
+.dc-status.expiring{background:#fef9c3;color:#ca8a04}
+.dc-amc{font-size:.72rem;color:var(--muted)}
+.dc-actions{display:flex;gap:8px;margin-top:12px}
+.dc-btn{flex:1;padding:8px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-family:'Manrope',sans-serif;font-size:.76rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s}
+.dc-btn:hover{border-color:var(--blue);color:var(--blue)}
+.dc-btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.dc-btn.primary:hover{background:var(--blue-dark)}
+
+/* AMC TIMELINE */
+.amc-list{display:flex;flex-direction:column;gap:14px}
+.amc-item{background:#fff;border-radius:14px;padding:18px 20px;border:1.5px solid var(--border);display:flex;align-items:center;gap:16px;transition:all .2s}
+.amc-item:hover{border-color:var(--blue);background:#fafbff}
+.amc-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.amc-device{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:2px}
+.amc-date{font-size:.76rem;color:var(--muted)}
+.amc-right{margin-left:auto;text-align:right}
+.amc-badge{font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:50px;display:inline-block;margin-bottom:4px}
+.amc-badge.done{background:#dcfce7;color:#16a34a}
+.amc-badge.upcoming{background:#dbeafe;color:#2563eb}
+.amc-badge.due{background:#fef9c3;color:#ca8a04}
+.amc-engineer{font-size:.72rem;color:var(--muted)}
+
+/* ENQUIRIES */
+.enquiry-list{display:flex;flex-direction:column;gap:12px}
+.enq-card{background:#fff;border-radius:14px;padding:20px;border:1.5px solid var(--border);transition:all .2s}
+.enq-card:hover{border-color:var(--blue)}
+.enq-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.enq-title{font-size:.92rem;font-weight:700;color:var(--navy)}
+.enq-badge{font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:50px}
+.enq-badge.open{background:#dbeafe;color:#2563eb}
+.enq-badge.resolved{background:#dcfce7;color:#16a34a}
+.enq-badge.pending{background:#fef9c3;color:#ca8a04}
+.enq-text{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.enq-footer{display:flex;gap:14px;font-size:.74rem;color:var(--muted)}
+
+/* PROFILE FORM */
+.profile-grid{display:grid;grid-template-columns:1fr 2fr;gap:28px}
+.profile-card{background:#fff;border-radius:16px;padding:28px;border:1.5px solid var(--border);text-align:center}
+.pf-avatar{width:80px;height:80px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.8rem;margin:0 auto 14px}
+.pf-name{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:3px}
+.pf-hosp{font-size:.82rem;color:var(--muted);margin-bottom:16px}
+.pf-badges{display:flex;flex-direction:column;gap:8px}
+.pf-badge{background:var(--bg);border-radius:8px;padding:8px 12px;font-size:.78rem;font-weight:600;color:var(--muted);display:flex;justify-content:space-between}
+.pf-badge span{color:var(--navy);font-weight:700}
+.form-card{background:#fff;border-radius:16px;padding:28px;border:1.5px solid var(--border)}
+.form-title{font-size:.96rem;font-weight:800;color:var(--navy);margin-bottom:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-field{margin-bottom:14px}
+.form-label{font-size:.76rem;font-weight:700;color:var(--navy);margin-bottom:5px;display:block}
+.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;font-family:'Manrope',sans-serif;font-size:.86rem;color:var(--text);outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--blue)}
+.form-save{background:var(--blue);color:#fff;border:none;padding:11px 28px;border-radius:50px;font-family:'Manrope',sans-serif;font-size:.86rem;font-weight:700;cursor:pointer;transition:all .2s}
+.form-save:hover{background:var(--blue-dark)}
+</style>
+</head>
+<body>
+
+<!-- Main -->
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left" style="display:flex;align-items:center;gap:24px">
+      <div class="hn-brand" style="cursor:pointer" onclick="window.location='index.html'">
+        <img src="assets/logo.webp" alt="Stackly Logo" style="height: 90px; width: auto;" />
+      </div>
+      <div style="width:1px;height:24px;background:var(--border)"></div>
+      <div>
+        <div class="tb-title" id="pageTitle">Overview</div>
+        <div class="tb-breadcrumb">My Account</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="tb-btn tb-notif">🔔</div>
+      <div class="tb-btn" onclick="window.location='contact.html'">📞</div>
+      <div class="tb-avatar-wrap">
+        <div class="tb-avi" id="userTbAvi">DK</div>
+        <div class="tb-uname" id="userTbName">User</div>
+      </div>
+      <div class="tb-btn" onclick="window.location='index.html'" title="Logout" style="color:var(--red);background:#fff1f1;border-color:#fecaca">⏻</div>
+    </div>
+  </div>
+
+  <nav class="header-nav">
+    <ul class="hn-links">
+      <li><a href="#" class="active" onclick="showTab('overview',this)">🏠 Overview</a></li>
+      <li><a href="#" onclick="showTab('orders',this)">📦 My Orders</a></li>
+      <li><a href="#" onclick="showTab('devices',this)">🔬 My Devices</a></li>
+      <li><a href="#" onclick="showTab('amc',this)">🔧 AMC & Service <span class="hn-badge">1</span></a></li>
+      <li><a href="#" onclick="showTab('enquiries',this)">💬 Enquiries <span class="hn-badge">2</span></a></li>
+      <li style="margin-left:16px;padding-left:16px;border-left:1px solid var(--border)"><a href="#" onclick="showTab('profile',this)">👤 My Profile</a></li>
+    </ul>
+    <div style="margin-left:auto;display:flex;gap:12px">
+      <a href="services.html" style="font-size:.8rem;font-weight:700;color:var(--blue)">Browse Products</a>
+      <a href="contact.html" style="font-size:.8rem;font-weight:700;color:var(--blue)">Support</a>
+    </div>
+  </nav>
+
+  <div class="page-content">
+
+    <!-- ══ OVERVIEW TAB ══ -->
+    <div class="tab-panel active" id="tab-overview">
+
+      <!-- Welcome Banner -->
+      <div class="welcome-banner">
+        <div class="wb-circles">
+          <div class="wb-circle wbc1"></div>
+          <div class="wb-circle wbc2"></div>
+        </div>
+        <div>
+          <div class="wb-greeting">Good morning</div>
+          <div class="wb-name" id="userWbName">Welcome</div>
+          <div class="wb-sub">Stackly, Salem — your next scheduled AMC visit is on <b style="color:#fff">18 June 2026</b>.</div>
+          <div class="wb-actions">
+            <button class="wb-btn-primary" onclick="showTab('amc',null)">View AMC Schedule</button>
+            <button class="wb-btn-sec" onclick="window.location='contact.html'">Raise a Service Request</button>
+          </div>
+        </div>
+        <div class="wb-right">
+          <div class="wb-stat-grid">
+            <div class="wb-stat"><div class="wbs-num">5</div><div class="wbs-lbl">Active Devices</div></div>
+            <div class="wb-stat"><div class="wbs-num">3</div><div class="wbs-lbl">AMC Visits Due</div></div>
+            <div class="wb-stat"><div class="wbs-num">2</div><div class="wbs-lbl">Open Enquiries</div></div>
+            <div class="wb-stat"><div class="wbs-num">98%</div><div class="wbs-lbl">Uptime</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="sc-icon-wrap" style="background:#eef1ff">📦</div>
+          <div><div class="sc-label">Total Orders</div><div class="sc-value">8</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-icon-wrap" style="background:#dcfce7">🔬</div>
+          <div><div class="sc-label">Active Devices</div><div class="sc-value">5</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-icon-wrap" style="background:#fef9c3">🔧</div>
+          <div><div class="sc-label">AMC Services Done</div><div class="sc-value">12</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-icon-wrap" style="background:#ede9fe">💬</div>
+          <div><div class="sc-label">Open Enquiries</div><div class="sc-value">2</div></div>
+        </div>
+      </div>
+
+      <!-- Recent Orders + Recent Activity -->
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:20px">
+        <div class="table-card">
+          <div class="tc-header">
+            <div class="tc-title">Recent Orders</div>
+            <a href="#" style="font-size:.78rem;font-weight:700;color:var(--blue)" onclick="showTab('orders',null)">View All →</a>
+          </div>
+          <table>
+            <thead><tr><th>Order ID</th><th>Device</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><b>#STK-2612</b></td><td>VentiCare 500</td><td>02 Jun 2026</td><td><span class="status-pill delivered">Delivered</span></td></tr>
+              <tr><td><b>#STK-2598</b></td><td>GlucoSense X1 ×3</td><td>14 May 2026</td><td><span class="status-pill delivered">Delivered</span></td></tr>
+              <tr><td><b>#STK-2581</b></td><td>CardioTrack Pro</td><td>28 Apr 2026</td><td><span class="status-pill transit">In Transit</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-card">
+          <div class="tc-header"><div class="tc-title">Recent Activity</div></div>
+          <div style="padding:16px 20px;display:flex;flex-direction:column;gap:0">
+            <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="width:32px;height:32px;border-radius:9px;background:#dcfce7;display:flex;align-items:center;justify-content:center;flex-shrink:0">✅</div>
+              <div><div style="font-size:.83rem;color:var(--text)"><b>VentiCare 500</b> delivered &amp; installed</div><div style="font-size:.72rem;color:var(--muted)">02 Jun 2026</div></div>
+            </div>
+            <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="width:32px;height:32px;border-radius:9px;background:#ede9fe;display:flex;align-items:center;justify-content:center;flex-shrink:0">🔧</div>
+              <div><div style="font-size:.83rem;color:var(--text)">AMC service completed for <b>CardioTrack Pro</b></div><div style="font-size:.72rem;color:var(--muted)">28 May 2026</div></div>
+            </div>
+            <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="width:32px;height:32px;border-radius:9px;background:#fef9c3;display:flex;align-items:center;justify-content:center;flex-shrink:0">💬</div>
+              <div><div style="font-size:.83rem;color:var(--text)">Enquiry #ENQ-045 raised for <b>EEG calibration</b></div><div style="font-size:.72rem;color:var(--muted)">20 May 2026</div></div>
+            </div>
+            <div style="display:flex;gap:12px;padding:12px 0">
+              <div style="width:32px;height:32px;border-radius:9px;background:#dbeafe;display:flex;align-items:center;justify-content:center;flex-shrink:0">📦</div>
+              <div><div style="font-size:.83rem;color:var(--text)"><b>GlucoSense X1 ×3</b> order placed</div><div style="font-size:.72rem;color:var(--muted)">14 May 2026</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ORDERS TAB ══ -->
+    <div class="tab-panel" id="tab-orders">
+      <div class="table-card">
+        <div class="tc-header">
+          <div class="tc-title">All Orders</div>
+          <button onclick="window.location='services.html'" style="background:var(--blue);color:#fff;border:none;padding:9px 18px;border-radius:50px;font-family:'Manrope',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer">+ New Order</button>
+        </div>
+        <table>
+          <thead><tr><th>Order ID</th><th>Device / Product</th><th>Qty</th><th>Value</th><th>Order Date</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><b>#STK-2612</b></td><td>VentiCare 500 — Portable Ventilator</td><td>1</td><td>₹4,20,000</td><td>02 Jun 2026</td><td><span class="status-pill delivered">Delivered</span></td><td><a href="#" style="font-size:.78rem;font-weight:700;color:var(--blue)">View →</a></td></tr>
+            <tr><td><b>#STK-2598</b></td><td>GlucoSense X1 — CGM Unit</td><td>3</td><td>₹1,35,000</td><td>14 May 2026</td><td><span class="status-pill delivered">Delivered</span></td><td><a href="#" style="font-size:.78rem;font-weight:700;color:var(--blue)">View →</a></td></tr>
+            <tr><td><b>#STK-2581</b></td><td>CardioTrack Pro — 12-Lead ECG</td><td>1</td><td>₹2,40,000</td><td>28 Apr 2026</td><td><span class="status-pill transit">In Transit</span></td><td><a href="#" style="font-size:.78rem;font-weight:700;color:var(--blue)">Track →</a></td></tr>
+            <tr><td><b>#STK-2540</b></td><td>OptiScan Pro — Wireless Ultrasound</td><td>1</td><td>₹3,10,000</td><td>10 Mar 2026</td><td><span class="status-pill delivered">Delivered</span></td><td><a href="#" style="font-size:.78rem;font-weight:700;color:var(--blue)">View →</a></td></tr>
+            <tr><td><b>#STK-2502</b></td><td>EEG Monitoring System</td><td>2</td><td>₹6,80,000</td><td>14 Jan 2026</td><td><span class="status-pill delivered">Delivered</span></td><td><a href="#" style="font-size:.78rem;font-weight:700;color:var(--blue)">View →</a></td></tr>
+            <tr><td><b>#STK-2487</b></td><td>GlucoSense X1 — CGM Unit</td><td>2</td><td>₹90,000</td><td>02 Dec 2025</td><td><span class="status-pill cancelled">Cancelled</span></td><td><a href="#" style="font-size:.78rem;font-weight:700;color:var(--blue)">Details →</a></td></tr>
+            <tr><td><b>#STK-2456</b></td><td>Dental Ultrasonic Scaler</td><td>3</td><td>₹75,000</td><td>18 Nov 2025</td><td><span class="status-pill delivered">Delivered</span></td><td><a href="#" style="font-size:.78rem;font-weight:700;color:var(--blue)">View →</a></td></tr>
+            <tr><td><b>#STK-2401</b></td><td>Auto-Refractometer</td><td>1</td><td>₹1,80,000</td><td>05 Oct 2025</td><td><span class="status-pill delivered">Delivered</span></td><td><a href="#" style="font-size:.78rem;font-weight:700;color:var(--blue)">View →</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ DEVICES TAB ══ -->
+    <div class="tab-panel" id="tab-devices">
+      <div class="devices-grid">
+        <div class="device-card">
+          <div class="dc-img">❤️</div>
+          <div class="dc-body">
+            <div class="dc-name">CardioTrack Pro</div>
+            <div class="dc-spec">12-Lead ECG Monitor · S/N: CTK-2024-0112</div>
+            <div class="dc-footer">
+              <span class="dc-status">AMC Active</span>
+              <span class="dc-amc">Expires: Jan 2027</span>
+            </div>
+            <div class="dc-actions">
+              <button class="dc-btn">View Manual</button>
+              <button class="dc-btn primary" onclick="showTab('amc',null)">Service History</button>
+            </div>
+          </div>
+        </div>
+        <div class="device-card">
+          <div class="dc-img">🩸</div>
+          <div class="dc-body">
+            <div class="dc-name">GlucoSense X1</div>
+            <div class="dc-spec">Continuous Glucose Monitor · S/N: GS-2025-0334</div>
+            <div class="dc-footer">
+              <span class="dc-status">AMC Active</span>
+              <span class="dc-amc">Expires: Mar 2027</span>
+            </div>
+            <div class="dc-actions">
+              <button class="dc-btn">View Manual</button>
+              <button class="dc-btn primary" onclick="showTab('amc',null)">Service History</button>
+            </div>
+          </div>
+        </div>
+        <div class="device-card">
+          <div class="dc-img">🫁</div>
+          <div class="dc-body">
+            <div class="dc-name">VentiCare 500</div>
+            <div class="dc-spec">Portable Ventilator · S/N: VC-2026-0089</div>
+            <div class="dc-footer">
+              <span class="dc-status expiring">AMC Due Soon</span>
+              <span class="dc-amc">Expires: Jul 2026</span>
+            </div>
+            <div class="dc-actions">
+              <button class="dc-btn">View Manual</button>
+              <button class="dc-btn primary" onclick="window.location='contact.html'">Renew AMC</button>
+            </div>
+          </div>
+        </div>
+        <div class="device-card">
+          <div class="dc-img">🔭</div>
+          <div class="dc-body">
+            <div class="dc-name">OptiScan Pro</div>
+            <div class="dc-spec">Wireless Ultrasound · S/N: OP-2026-0041</div>
+            <div class="dc-footer">
+              <span class="dc-status">AMC Active</span>
+              <span class="dc-amc">Expires: Feb 2027</span>
+            </div>
+            <div class="dc-actions">
+              <button class="dc-btn">View Manual</button>
+              <button class="dc-btn primary" onclick="showTab('amc',null)">Service History</button>
+            </div>
+          </div>
+        </div>
+        <div class="device-card">
+          <div class="dc-img">🧠</div>
+          <div class="dc-body">
+            <div class="dc-name">EEG Monitoring System</div>
+            <div class="dc-spec">32-Channel EEG · S/N: EEG-2026-0007</div>
+            <div class="dc-footer">
+              <span class="dc-status">AMC Active</span>
+              <span class="dc-amc">Expires: Dec 2026</span>
+            </div>
+            <div class="dc-actions">
+              <button class="dc-btn">View Manual</button>
+              <button class="dc-btn primary" onclick="showTab('amc',null)">Service History</button>
+            </div>
+          </div>
+        </div>
+        <div class="device-card" style="border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;min-height:240px;cursor:pointer;transition:all .2s" onclick="window.location='services.html'">
+          <div style="text-align:center;padding:24px">
+            <div style="font-size:2rem;margin-bottom:10px">➕</div>
+            <div style="font-size:.9rem;font-weight:700;color:var(--muted)">Add a Device</div>
+            <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Browse our product catalogue</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ AMC TAB ══ -->
+    <div class="tab-panel" id="tab-amc">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div>
+          <div style="font-size:.9rem;font-weight:800;color:var(--navy);margin-bottom:16px">Upcoming & Recent Services</div>
+          <div class="amc-list">
+            <div class="amc-item" style="border-color:var(--orange)">
+              <div class="amc-icon" style="background:#fef9c3">⚠️</div>
+              <div>
+                <div class="amc-device">VentiCare 500 — AMC Renewal</div>
+                <div class="amc-date">Due by 01 July 2026</div>
+              </div>
+              <div class="amc-right">
+                <div class="amc-badge due">Action Needed</div>
+                <div class="amc-engineer"><a href="contact.html" style="color:var(--blue);font-weight:600">Renew Now →</a></div>
+              </div>
+            </div>
+            <div class="amc-item">
+              <div class="amc-icon" style="background:#dbeafe">📅</div>
+              <div>
+                <div class="amc-device">CardioTrack Pro — Preventive Maintenance</div>
+                <div class="amc-date">Scheduled: 18 June 2026</div>
+              </div>
+              <div class="amc-right">
+                <div class="amc-badge upcoming">Upcoming</div>
+                <div class="amc-engineer">Eng. Suresh Kumar</div>
+              </div>
+            </div>
+            <div class="amc-item">
+              <div class="amc-icon" style="background:#dcfce7">✅</div>
+              <div>
+                <div class="amc-device">CardioTrack Pro — PM Visit</div>
+                <div class="amc-date">Completed: 28 May 2026</div>
+              </div>
+              <div class="amc-right">
+                <div class="amc-badge done">Completed</div>
+                <div class="amc-engineer">Eng. Suresh Kumar</div>
+              </div>
+            </div>
+            <div class="amc-item">
+              <div class="amc-icon" style="background:#dcfce7">✅</div>
+              <div>
+                <div class="amc-device">EEG System — Calibration</div>
+                <div class="amc-date">Completed: 10 May 2026</div>
+              </div>
+              <div class="amc-right">
+                <div class="amc-badge done">Completed</div>
+                <div class="amc-engineer">Eng. Pradeep R.</div>
+              </div>
+            </div>
+            <div class="amc-item">
+              <div class="amc-icon" style="background:#dcfce7">✅</div>
+              <div>
+                <div class="amc-device">GlucoSense X1 ×3 — Installation</div>
+                <div class="amc-date">Completed: 16 May 2026</div>
+              </div>
+              <div class="amc-right">
+                <div class="amc-badge done">Completed</div>
+                <div class="amc-engineer">Eng. Suresh Kumar</div>
+              </div>
+            </div>
+            <div class="amc-item">
+              <div class="amc-icon" style="background:#dcfce7">✅</div>
+              <div>
+                <div class="amc-device">OptiScan Pro — Installation</div>
+                <div class="amc-date">Completed: 22 Mar 2026</div>
+              </div>
+              <div class="amc-right">
+                <div class="amc-badge done">Completed</div>
+                <div class="amc-engineer">Eng. Mohan S.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:.9rem;font-weight:800;color:var(--navy);margin-bottom:16px">Raise a Service Request</div>
+          <div style="background:#fff;border-radius:16px;padding:24px;border:1.5px solid var(--border)">
+            <div style="margin-bottom:14px">
+              <label class="form-label">Device</label>
+              <select class="form-input" style="appearance:none">
+                <option>Select a device</option>
+                <option>CardioTrack Pro</option>
+                <option>GlucoSense X1</option>
+                <option>VentiCare 500</option>
+                <option>OptiScan Pro</option>
+                <option>EEG Monitoring System</option>
+              </select>
+            </div>
+            <div style="margin-bottom:14px">
+              <label class="form-label">Issue Type</label>
+              <select class="form-input" style="appearance:none">
+                <option>Select issue type</option>
+                <option>Preventive Maintenance Request</option>
+                <option>Breakdown / Not Working</option>
+                <option>Calibration Required</option>
+                <option>Consumable Replacement</option>
+                <option>Software Update</option>
+              </select>
+            </div>
+            <div style="margin-bottom:14px">
+              <label class="form-label">Describe the Issue</label>
+              <textarea class="form-input" style="height:90px;resize:vertical" placeholder="Describe what you're experiencing…"></textarea>
+            </div>
+            <div style="margin-bottom:20px">
+              <label class="form-label">Preferred Visit Date</label>
+              <input class="form-input" type="date" value="2026-06-18"/>
+            </div>
+            <button class="form-save" style="width:100%" onclick="alert('Service request submitted! Our team will confirm within 4 hours.')">Submit Service Request →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ENQUIRIES TAB ══ -->
+    <div class="tab-panel" id="tab-enquiries">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <div style="font-size:.9rem;font-weight:800;color:var(--navy)">My Enquiries</div>
+        <button onclick="window.location='contact.html'" style="background:var(--blue);color:#fff;border:none;padding:9px 18px;border-radius:50px;font-family:'Manrope',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer">+ New Enquiry</button>
+      </div>
+      <div class="enquiry-list">
+        <div class="enq-card">
+          <div class="enq-top">
+            <div class="enq-title">#ENQ-047 — VentiCare 500 AMC Renewal Pricing</div>
+            <span class="enq-badge open">Open</span>
+          </div>
+          <div class="enq-text">Requesting updated pricing for VentiCare 500 AMC renewal under the Standard plan. Our current contract expires 01 July 2026 and we'd like to discuss upgrading to the Enterprise plan.</div>
+          <div class="enq-footer"><span>📅 10 Jun 2026</span><span>💬 1 reply</span><a href="#" style="color:var(--blue);font-weight:700;font-size:.74rem">View Thread →</a></div>
+        </div>
+        <div class="enq-card">
+          <div class="enq-top">
+            <div class="enq-title">#ENQ-045 — EEG System Calibration Certificate</div>
+            <span class="enq-badge pending">Pending Reply</span>
+          </div>
+          <div class="enq-text">Requesting calibration certificate for the EEG Monitoring System (S/N: EEG-2026-0007) for our NABH re-accreditation audit scheduled on 25 June 2026.</div>
+          <div class="enq-footer"><span>📅 20 May 2026</span><span>💬 3 replies</span><a href="#" style="color:var(--blue);font-weight:700;font-size:.74rem">View Thread →</a></div>
+        </div>
+        <div class="enq-card" style="opacity:.7">
+          <div class="enq-top">
+            <div class="enq-title">#ENQ-038 — GlucoSense X1 Consumables Quote</div>
+            <span class="enq-badge resolved">Resolved</span>
+          </div>
+          <div class="enq-text">Requested pricing for GlucoSense X1 sensor strips — 12-month supply for 3 units. Quote received and order placed.</div>
+          <div class="enq-footer"><span>📅 02 May 2026</span><span>💬 5 replies</span><a href="#" style="color:var(--blue);font-weight:700;font-size:.74rem">View Thread →</a></div>
+        </div>
+        <div class="enq-card" style="opacity:.7">
+          <div class="enq-top">
+            <div class="enq-title">#ENQ-031 — CardioTrack Pro Training for Nursing Staff</div>
+            <span class="enq-badge resolved">Resolved</span>
+          </div>
+          <div class="enq-text">Requested on-site training for 8 nurses on CardioTrack Pro operation and daily maintenance. Training completed on 15 April 2026.</div>
+          <div class="enq-footer"><span>📅 10 Apr 2026</span><span>💬 4 replies</span><a href="#" style="color:var(--blue);font-weight:700;font-size:.74rem">View Thread →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PROFILE TAB ══ -->
+    <div class="tab-panel" id="tab-profile">
+      <div class="profile-grid">
+        <div class="profile-card">
+          <div class="pf-avatar" id="userPfAvatar">DK</div>
+          <div class="pf-name" id="userPfName">Dr. Kavitha Ramanathan</div>
+          <div class="pf-hosp">Meenakshi Mission Hospital, Madurai</div>
+          <div class="pf-badges">
+            <div class="pf-badge">Member Since <span>Oct 2024</span></div>
+            <div class="pf-badge">Account Type <span>Hospital Admin</span></div>
+            <div class="pf-badge">Total Orders <span>8</span></div>
+            <div class="pf-badge">Active AMC <span>4 Devices</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="form-card" style="margin-bottom:20px">
+            <div class="form-title">Personal Information</div>
+            <div class="form-row">
+              <div><label class="form-label">First Name</label><input class="form-input" value="Kavitha"/></div>
+              <div><label class="form-label">Last Name</label><input class="form-input" value="Ramanathan"/></div>
+            </div>
+            <div class="form-row">
+              <div><label class="form-label">Email</label><input class="form-input" type="email" id="userPfEmail" value="kavitha@meenakshimission.com"/></div>
+              <div><label class="form-label">Phone</label><input class="form-input" value="+91 98432 11987"/></div>
+            </div>
+            <div class="form-field"><label class="form-label">Organisation / Hospital</label><input class="form-input" value="Meenakshi Mission Hospital, Madurai"/></div>
+            <div class="form-field"><label class="form-label">Designation</label><input class="form-input" value="Biomedical Equipment Manager"/></div>
+            <button class="form-save" onclick="alert('Profile updated successfully!')">Save Changes</button>
+          </div>
+          <div class="form-card">
+            <div class="form-title">Change Password</div>
+            <div class="form-field"><label class="form-label">Current Password</label><input class="form-input" type="password" placeholder="••••••••"/></div>
+            <div class="form-row">
+              <div><label class="form-label">New Password</label><input class="form-input" type="password" placeholder="••••••••"/></div>
+              <div><label class="form-label">Confirm Password</label><input class="form-input" type="password" placeholder="••••••••"/></div>
+            </div>
+            <button class="form-save" onclick="alert('Password updated!')">Update Password</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+function showTab(name, clickedLink) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  document.querySelectorAll('.hn-links li a').forEach(a => a.classList.remove('active'));
+  if (clickedLink) {
+    clickedLink.classList.add('active');
+  } else {
+    document.querySelectorAll('.hn-links li a').forEach(a => {
+      if (a.getAttribute('onclick') && a.getAttribute('onclick').includes("'" + name + "'")) {
+        a.classList.add('active');
+      }
+    });
+  }
+  const titles = { overview:'Overview', orders:'My Orders', devices:'My Devices', amc:'AMC & Service', enquiries:'Enquiries', profile:'My Profile' };
+  document.getElementById('pageTitle').textContent = titles[name] || 'My Account';
+}
+
+document.querySelectorAll('.hn-links li a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    if(this.getAttribute('href') === '#' && this.getAttribute('onclick')) {
+      e.preventDefault();
+    }
+  });
+});
+
+// ── Load profile from login session ──
+(function() {
+  const email = localStorage.getItem('stckly_email') || '';
+  if (!email) return;
+
+  // Use the exact ID prefix as the display name
+  const prefix = email.split('@')[0];
+  const displayName = prefix || 'User';
+  const initials = displayName.substring(0, 2).toUpperCase();
+
+  // Note: Sidebar elements were removed, skipping sbAvatar/sbName
+
+  // Topbar avatar & username
+  const tbAvi = document.getElementById('userTbAvi');
+  if (tbAvi) tbAvi.textContent = initials;
+  const tbName = document.getElementById('userTbName');
+  if (tbName) tbName.textContent = displayName;
+
+  // Welcome banner
+  const wbName = document.getElementById('userWbName');
+  if (wbName) wbName.textContent = displayName;
+
+  // Profile Tab
+  const pfAvatar = document.getElementById('userPfAvatar');
+  if (pfAvatar) pfAvatar.textContent = initials;
+  const pfName = document.getElementById('userPfName');
+  if (pfName) pfName.textContent = displayName;
+  const pfEmail = document.getElementById('userPfEmail');
+  if (pfEmail) pfEmail.value = email;
+})();
+</script>
+</body>
+</html>

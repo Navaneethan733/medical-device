@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Blog — STCKLY Medical Devices</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero{background:linear-gradient(135deg,#e8f0ff 0%,#f0f7ff 40%,#ddeeff 100%);padding:80px 60px 70px;position:relative;overflow:hidden}
+.page-hero-circles{position:absolute;right:0;top:50%;transform:translateY(-50%);pointer-events:none}
+.page-hero-circle{position:absolute;border-radius:50%;border:1px solid rgba(60,108,245,.12)}
+.phc1{width:400px;height:400px;top:50%;right:-60px;transform:translateY(-50%)}
+.phc2{width:550px;height:550px;top:50%;right:-160px;transform:translateY(-50%)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted);margin-bottom:20px}
+.breadcrumb a{color:var(--blue);font-weight:600}
+.page-hero-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:var(--navy);margin-bottom:14px;line-height:1.1}
+.page-hero-sub{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.75}
+
+/* BLOG SECTION */
+.blog-page{padding:100px 60px;background:#fff}
+.blog-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:56px}
+.blog-filter-btn{padding:9px 20px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-family:'Manrope',sans-serif;font-size:.8rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s}
+.blog-filter-btn.active,.blog-filter-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* FEATURED POST */
+.blog-featured{display:grid;grid-template-columns:1.4fr 1fr;gap:0;border-radius:24px;overflow:hidden;border:1.5px solid var(--border);margin-bottom:56px}
+.bf-img{position:relative;min-height:420px}
+.bf-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bf-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,27,62,.85) 0%,rgba(13,27,62,.2) 60%,transparent 100%);padding:40px;display:flex;flex-direction:column;justify-content:flex-end}
+.bf-badge{background:var(--blue);color:#fff;font-size:.7rem;font-weight:700;padding:5px 14px;border-radius:50px;display:inline-block;margin-bottom:12px;width:fit-content}
+.bf-title{font-size:1.5rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:12px}
+.bf-meta{display:flex;gap:14px;font-size:.76rem;color:rgba(255,255,255,.7)}
+.bf-body{padding:40px;display:flex;flex-direction:column;justify-content:center}
+.bf-tag{font-size:.74rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.bf-excerpt{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:28px}
+.bf-author{display:flex;align-items:center;gap:12px;margin-top:auto}
+.bf-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0}
+.bf-avatar img{height:100%;object-fit:cover}
+.bf-author-name{font-size:.86rem;font-weight:700;color:var(--navy)}
+.bf-author-role{font-size:.74rem;color:var(--muted)}
+
+/* BLOG GRID */
+.blog-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.blog-card-lg{background:#fff;border-radius:20px;overflow:hidden;border:1.5px solid var(--border);transition:all .3s;cursor:pointer}
+.blog-card-lg:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(60,108,245,.12)}
+.blg-img{height:220px;overflow:hidden;position:relative}
+.blg-img img{height:100%;width:100%;object-fit:cover;transition:transform .5s}
+.blog-card-lg:hover .blg-img img{transform:scale(1.05)}
+.blg-cat{position:absolute;bottom:14px;left:14px;background:#fff;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:50px;color:var(--blue)}
+.blg-body{padding:24px}
+.blg-meta{display:flex;gap:14px;font-size:.74rem;color:var(--muted);margin-bottom:12px}
+.blg-title{font-size:.96rem;font-weight:800;color:var(--navy);line-height:1.4;margin-bottom:12px}
+.blg-excerpt{font-size:.82rem;color:var(--muted);line-height:1.65;margin-bottom:16px}
+.blg-footer{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--border)}
+.blg-author{display:flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;color:var(--navy)}
+.blg-author-avatar{width:28px;height:28px;border-radius:50%;overflow:hidden}
+.blg-author-avatar img{height:100%;object-fit:cover}
+.blg-read{font-size:.74rem;font-weight:700;color:var(--blue)}
+.blg-read:hover{text-decoration:underline}
+
+/* SIDEBAR */
+.blog-layout{display:grid;grid-template-columns:1fr 320px;gap:48px;margin-top:56px}
+.sidebar-widget{background:var(--bg);border-radius:16px;padding:28px;margin-bottom:24px;border:1.5px solid var(--border)}
+.sw-title{font-size:.9rem;font-weight:800;color:var(--navy);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.sw-popular{display:flex;flex-direction:column;gap:16px}
+.swp-item{display:flex;gap:12px;cursor:pointer}
+.swp-img{width:68px;height:60px;border-radius:10px;overflow:hidden;flex-shrink:0}
+.swp-img img{height:100%;object-fit:cover}
+.swp-title{font-size:.82rem;font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:4px}
+.swp-meta{font-size:.72rem;color:var(--muted)}
+.sw-tags{display:flex;flex-wrap:wrap;gap:8px}
+.sw-tag{background:#fff;border:1.5px solid var(--border);color:var(--muted);font-size:.76rem;font-weight:600;padding:6px 14px;border-radius:50px;cursor:pointer;transition:all .2s}
+.sw-tag:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.sw-nl-input{width:100%;padding:11px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'Manrope',sans-serif;font-size:.86rem;outline:none;margin-bottom:12px;background:#fff}
+.sw-nl-btn{width:100%;padding:11px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-family:'Manrope',sans-serif;font-size:.86rem;font-weight:700;cursor:pointer;transition:background .2s}
+.sw-nl-btn:hover{background:var(--blue-dark)}
+
+@media(max-width:1100px){
+  .blog-featured{grid-template-columns:1fr}
+  .bf-img{min-height:280px}
+  .blog-layout{grid-template-columns:1fr}
+  .blog-main-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:800px){
+  .page-hero,.blog-page{padding:70px 24px}
+  .blog-main-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="call-widget">
+  <div class="cw-icon">📞</div>
+  <div><div class="cw-lbl">Emergency Helpline</div><div class="cw-num">+91 98765 43210</div></div>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-close" onclick="closeMobile()">✕</span>
+  <a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a><a href="blog.html">Blog</a><a href="contact.html">Contact Us</a>
+</div>
+<div class="topbar">
+  <span>📍 <b>Salem, Tamil Nadu, India</b></span>
+  <div class="topbar-right"><span>📞 <b>+91 98765 43210</b></span><span>🕐 Mon–Sat: 9AM–6PM IST</span></div>
+</div>
+<nav id="navbar">
+  <div class="nav-logo"><img src="assets/logo.webp" alt="Stackly Logo" style="height: 100px; width: auto;" /></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="contact.html">Contact Us</a></li>
+  </ul>
+  <button class="nav-emergency" onclick="window.location='login.html'">Login/Register</button>
+  <div class="hamburger" onclick="openMobile()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero-circles"><div class="page-hero-circle phc1"></div><div class="page-hero-circle phc2"></div></div>
+  <div class="breadcrumb reveal"><a href="index.html">Home</a><span>›</span><span>Blog</span></div>
+  <div class="about-tag reveal">✚ Insights & Articles</div>
+  <h1 class="page-hero-title reveal">Trending Topics in<br>Medicine &amp; Wellness</h1>
+  <p class="page-hero-sub reveal">Clinical insights, device care guides, regulatory updates, and healthcare innovation stories — curated by the STCKLY team.</p>
+</section>
+
+<!-- Blog Page -->
+<section class="blog-page">
+  <!-- Filter Bar -->
+  <div class="blog-filters reveal">
+    <button class="blog-filter-btn active">All Posts</button>
+    <button class="blog-filter-btn">Cardiology</button>
+    <button class="blog-filter-btn">Ophthalmology</button>
+    <button class="blog-filter-btn">Technology</button>
+    <button class="blog-filter-btn">Device Care</button>
+    <button class="blog-filter-btn">Regulatory</button>
+    <button class="blog-filter-btn">Clinical Tips</button>
+  </div>
+
+  <!-- Featured Post -->
+  <div class="blog-featured reveal">
+    <div class="bf-img">
+      <img src="assets/image_6.webp" alt="Featured Blog"/>
+      <div class="bf-overlay">
+        <div class="bf-badge">Featured</div>
+        <div class="bf-title">Selecting the Best Medical Device for Your Clinical Needs in 2026</div>
+        <div class="bf-meta"><span>📅 08 June 2026</span><span>🕐 8 min read</span></div>
+      </div>
+    </div>
+    <div class="bf-body">
+      <div class="bf-tag">Device Care</div>
+      <p class="bf-excerpt">Choosing the right medical device is one of the most consequential decisions a hospital administrator makes. From specification validation to total cost of ownership, this guide walks through every factor you should weigh before procurement.</p>
+      <button class="btn-primary" style="width:fit-content;margin-bottom:24px">Read Full Article →</button>
+      <div class="bf-author">
+        <div class="bf-avatar"><img src="assets/image_2.webp" alt="Author"/></div>
+        <div>
+          <div class="bf-author-name">Arun Krishnamurthy</div>
+          <div class="bf-author-role">CEO, STCKLY</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Grid + Sidebar -->
+  <div class="blog-layout">
+    <div>
+      <div class="blog-main-grid stagger-wrap">
+        <div class="blog-card-lg reveal">
+          <div class="blg-img">
+            <img src="assets/image_7.webp" alt="Blog 2"/>
+            <div class="blg-cat">Technology</div>
+          </div>
+          <div class="blg-body">
+            <div class="blg-meta"><span>📅 05 June 2026</span><span>🕐 6 min</span></div>
+            <div class="blg-title">AI-Powered Diagnostics: The Future of Patient Monitoring</div>
+            <div class="blg-excerpt">How machine learning is transforming cardiac arrhythmia detection and what it means for frontline clinicians.</div>
+            <div class="blg-footer">
+              <div class="blg-author"><div class="blg-author-avatar"><img src="assets/image_5.webp" alt=""/></div>Meera Sundaram</div>
+              <a class="blg-read" href="#">Read More →</a>
+            </div>
+          </div>
+        </div>
+        <div class="blog-card-lg reveal">
+          <div class="blg-img">
+            <img src="assets/image_8.webp" alt="Blog 3"/>
+            <div class="blg-cat">Cardiology</div>
+          </div>
+          <div class="blg-body">
+            <div class="blg-meta"><span>📅 01 June 2026</span><span>🕐 5 min</span></div>
+            <div class="blg-title">Gentle Monitoring Technologies to Promote Heart Wellness</div>
+            <div class="blg-excerpt">Non-invasive wearable ECG monitors are changing how cardiologists track patients between clinic visits.</div>
+            <div class="blg-footer">
+              <div class="blg-author"><div class="blg-author-avatar"><img src="assets/image_2.webp" alt=""/></div>Dr. Rajesh Patel</div>
+              <a class="blg-read" href="#">Read More →</a>
+            </div>
+          </div>
+        </div>
+        <div class="blog-card-lg reveal">
+          <div class="blg-img">
+            <img src="assets/image_9.webp" alt="Blog 4"/>
+            <div class="blg-cat">Regulatory</div>
+          </div>
+          <div class="blg-body">
+            <div class="blg-meta"><span>📅 28 May 2026</span><span>🕐 4 min</span></div>
+            <div class="blg-title">Understanding CDSCO MDR 2017 Compliance for Hospital Procurement</div>
+            <div class="blg-excerpt">A practical guide for hospital purchase committees on navigating India's medical device regulatory framework.</div>
+            <div class="blg-footer">
+              <div class="blg-author"><div class="blg-author-avatar"><img src="assets/image_4.webp" alt=""/></div>Priya Venkatesh</div>
+              <a class="blg-read" href="#">Read More →</a>
+            </div>
+          </div>
+        </div>
+        <div class="blog-card-lg reveal">
+          <div class="blg-img">
+            <img src="assets/image_10.webp" alt="Blog 5"/>
+            <div class="blg-cat">Device Care</div>
+          </div>
+          <div class="blg-body">
+            <div class="blg-meta"><span>📅 22 May 2026</span><span>🕐 7 min</span></div>
+            <div class="blg-title">Preventive Maintenance Checklist for ICU Equipment</div>
+            <div class="blg-excerpt">Download and adapt this 32-point checklist used by STCKLY's biomedical engineers during every AMC visit.</div>
+            <div class="blg-footer">
+              <div class="blg-author"><div class="blg-author-avatar"><img src="assets/image_2.webp" alt=""/></div>Arun Krishnamurthy</div>
+              <a class="blg-read" href="#">Read More →</a>
+            </div>
+          </div>
+        </div>
+        <div class="blog-card-lg reveal">
+          <div class="blg-img">
+            <img src="assets/image_11.webp" alt="Blog 6"/>
+            <div class="blg-cat">Clinical Tips</div>
+          </div>
+          <div class="blg-body">
+            <div class="blg-meta"><span>📅 18 May 2026</span><span>🕐 5 min</span></div>
+            <div class="blg-title">Optimising Ventilator Settings for Post-Surgical Patients</div>
+            <div class="blg-excerpt">Clinical parameters every ICU nurse should know when initiating ventilatory support in the immediate post-op period.</div>
+            <div class="blg-footer">
+              <div class="blg-author"><div class="blg-author-avatar"><img src="assets/image_5.webp" alt=""/></div>Meera Sundaram</div>
+              <a class="blg-read" href="#">Read More →</a>
+            </div>
+          </div>
+        </div>
+        <div class="blog-card-lg reveal">
+          <div class="blg-img">
+            <img src="assets/image_12.webp" alt="Blog 7"/>
+            <div class="blg-cat">Technology</div>
+          </div>
+          <div class="blg-body">
+            <div class="blg-meta"><span>📅 10 May 2026</span><span>🕐 6 min</span></div>
+            <div class="blg-title">Wireless Ultrasound: How Point-of-Care Imaging Is Evolving</div>
+            <div class="blg-excerpt">Handheld ultrasound probes are transforming emergency medicine and rural healthcare accessibility across India.</div>
+            <div class="blg-footer">
+              <div class="blg-author"><div class="blg-author-avatar"><img src="assets/image_4.webp" alt=""/></div>Dr. Rajesh Patel</div>
+              <a class="blg-read" href="#">Read More →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:48px" class="reveal">
+        <button class="btn-secondary">Load More Articles</button>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div>
+      <div class="sidebar-widget reveal">
+        <div class="sw-title">Popular Articles</div>
+        <div class="sw-popular">
+          <div class="swp-item">
+            <div class="swp-img"><img src="assets/image_6.webp" alt=""/></div>
+            <div><div class="swp-title">AI-Powered Diagnostics: Future of Patient Monitoring</div><div class="swp-meta">05 June 2026 · 6 min</div></div>
+          </div>
+          <div class="swp-item">
+            <div class="swp-img"><img src="assets/image_8.webp" alt=""/></div>
+            <div><div class="swp-title">Gentle Monitoring for Heart Wellness</div><div class="swp-meta">01 June 2026 · 5 min</div></div>
+          </div>
+          <div class="swp-item">
+            <div class="swp-img"><img src="assets/image_11.webp" alt=""/></div>
+            <div><div class="swp-title">Optimising Ventilator Settings for ICU Patients</div><div class="swp-meta">18 May 2026 · 5 min</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-widget reveal">
+        <div class="sw-title">Topics</div>
+        <div class="sw-tags">
+          <span class="sw-tag">Cardiology</span>
+          <span class="sw-tag">Ophthalmology</span>
+          <span class="sw-tag">Technology</span>
+          <span class="sw-tag">Device Care</span>
+          <span class="sw-tag">Regulatory</span>
+          <span class="sw-tag">ICU</span>
+          <span class="sw-tag">Diagnostics</span>
+          <span class="sw-tag">Neurology</span>
+          <span class="sw-tag">Dental</span>
+        </div>
+      </div>
+      <div class="sidebar-widget reveal">
+        <div class="sw-title">Get Articles by Email</div>
+        <input class="sw-nl-input" type="email" placeholder="your@email.com"/>
+        <button class="sw-nl-btn">Subscribe →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-logo"><img src="assets/logo.webp" alt="Stackly Logo" style="height: 100px; width: auto;" /></div>
+      <p class="footer-desc">Precision medical devices engineered in Salem, Tamil Nadu. Trusted by clinicians, cleared by regulators, built for India's healthcare future.</p>
+      <div class="footer-founder">
+        <div class="founder-avatar"><img src="assets/image_2.webp" alt="Founder"/></div>
+        <div><div class="founder-name">Arun Krishnamurthy</div><div class="founder-title">Co Founder, STCKLY</div></div>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Quick Links</h5><ul class="footer-list"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="services.html">Our Services</a></li><li><a href="blog.html">Our Blog</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+    <div class="footer-col"><h5>Get In Touch</h5><div class="footer-contact-lbl">Location</div><div class="footer-contact-val">Salem, Tamil Nadu, India — 636 001</div><div class="footer-contact-lbl">Contact</div><div class="footer-contact-val">Phone: <a href="tel:+919876543210">+91 98765 43210</a></div><div class="footer-contact-val">Email: <a href="mailto:info@stckly.com">info@stckly.com</a></div></div>
+    <div class="footer-col"><h5>Services</h5><ul class="footer-list"><li><a href="#">Cardiology</a></li><li><a href="#">Neuro Surgery</a></li><li><a href="#">Dental Care</a></li><li><a href="#">Ophthalmology</a></li><li><a href="#">Diagnostics</a></li></ul></div>
+    <div class="footer-col"><h5>Blog Topics</h5><ul class="footer-list"><li><a href="#">Device Care</a></li><li><a href="#">Clinical Tips</a></li><li><a href="#">Regulatory</a></li><li><a href="#">Technology</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 STCKLY Medical Devices, Salem, Tamil Nadu, India. All rights reserved.</div>
+    <div class="footer-socials"><a class="social" href="#">in</a><a class="social" href="#">𝕏</a><a class="social" href="#">f</a><a class="social" href="#">▶</a></div>
+  </div>
+</footer>
+
+<script>
+const allReveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }), {threshold:.12});
+allReveals.forEach(el => ro.observe(el));
+window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50));
+function openMobile(){ document.getElementById('mobileMenu').classList.add('open'); }
+function closeMobile(){ document.getElementById('mobileMenu').classList.remove('open'); }
+document.querySelectorAll('.blog-filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
